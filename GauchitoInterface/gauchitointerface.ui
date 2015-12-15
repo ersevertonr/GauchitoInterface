@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>GauchitoInterface</class>
+ <widget class="QMainWindow" name="GauchitoInterface">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>792</width>
+    <height>468</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>GauchitoInterface</string>
+  </property>
+  <property name="toolButtonStyle">
+   <enum>Qt::ToolButtonIconOnly</enum>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <widget class="QLabel" name="Home_GauchitoInterface">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>10</y>
+      <width>571</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>40</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Gauchito Interface</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Home_PaineldeMonitorament">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>90</y>
+      <width>551</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>20</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Painel de Monitoriamento e Controle</string>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="groupBox">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>170</y>
+      <width>511</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="mouseTracking">
+     <bool>true</bool>
+    </property>
+    <property name="acceptDrops">
+     <bool>false</bool>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QGroupBox {border: 1px solid black}</string>
+    </property>
+    <property name="title">
+     <string>Sinal do Wifi</string>
+    </property>
+    <property name="flat">
+     <bool>false</bool>
+    </property>
+    <property name="checkable">
+     <bool>false</bool>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+    <widget class="QProgressBar" name="SinalQualidade">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>60</y>
+       <width>251</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="value">
+      <number>0</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelQualidade">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>40</y>
+       <width>121</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Qualidade do Sinal:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelStatusSinal">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>40</y>
+       <width>121</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>STATUS do Sinal:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="SinalStatus">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>60</y>
+       <width>101</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>OFFLINE</string>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>792</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuMonitoramento">
+    <property name="title">
+     <string>Monitoramento</string>
+    </property>
+    <addaction name="actionCentral_de_Monitoramento"/>
+   </widget>
+   <widget class="QMenu" name="menuControle">
+    <property name="title">
+     <string>Controle</string>
+    </property>
+    <addaction name="actionControles"/>
+    <addaction name="actionConex_es_de_Rede"/>
+   </widget>
+   <widget class="QMenu" name="menuSobre_o_Gauchito">
+    <property name="title">
+     <string>Ajuda</string>
+    </property>
+    <addaction name="actionInstru_es"/>
+    <addaction name="actionSobre_o_Gauchito"/>
+   </widget>
+   <addaction name="menuMonitoramento"/>
+   <addaction name="menuControle"/>
+   <addaction name="menuSobre_o_Gauchito"/>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionA_es">
+   <property name="text">
+    <string>Ações</string>
+   </property>
+  </action>
+  <action name="actionConex_es_de_Rede">
+   <property name="text">
+    <string>Conexão WiFi</string>
+   </property>
+  </action>
+  <action name="actionInstru_es">
+   <property name="text">
+    <string>Instruções</string>
+   </property>
+  </action>
+  <action name="actionSobre_o_Gauchito">
+   <property name="text">
+    <string>Sobre o Gauchito</string>
+   </property>
+  </action>
+  <action name="actionCentral_de_Monitoramento">
+   <property name="text">
+    <string>Central de Monitoramento</string>
+   </property>
+  </action>
+  <action name="actionControles">
+   <property name="text">
+    <string>Controles</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>

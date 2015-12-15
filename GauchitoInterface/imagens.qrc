@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/imagens">
+        <file>imagens/gauchitoCorteSuperior.jpg</file>
+    </qresource>
+</RCC>
