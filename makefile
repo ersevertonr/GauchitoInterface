@@ -3,12 +3,12 @@ carregar:
 	@echo ------------------------------
 	git push
 	@echo ------------------------------
-	@echo ALTERACOES SALVAS COM SUCESSO
+	@echo REPOSITÓRIO CARREGADO
 
 salvar:
 	@echo SALVANDO REMOTAMENTE NO GIT
 	@echo ------------------------------
-	git commit -m "Teste de Conexão"
-	git pull origin master
+	git commit -m "Desenvolvimento"
+	git pull
 	@echo ------------------------------
 	@echo ALTERACOES SALVAS COM SUCESSO
