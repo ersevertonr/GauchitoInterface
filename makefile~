@@ -8,7 +8,6 @@ carregar:
 salvar:
 	@echo SALVANDO REMOTAMENTE NO GIT
 	@echo ------------------------------
-
 	git commit
 	git pull origin master
 	@echo ------------------------------

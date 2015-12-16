@@ -8,7 +8,7 @@ carregar:
 salvar:
 	@echo SALVANDO REMOTAMENTE NO GIT
 	@echo ------------------------------
-	git commit
+	git commit -m "Teste de Conexão"
 	git pull origin master
 	@echo ------------------------------
 	@echo ALTERACOES SALVAS COM SUCESSO
