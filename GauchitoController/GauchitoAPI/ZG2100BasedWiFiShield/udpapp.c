@@ -1,7 +1,7 @@
 /******************************************************************************
 
-  Filename:		udpapp.h
-  Description:	UDP app for the WiShield 1.0
+  Filename:   udpapp.h
+  Description:  UDP app for the WiShield 1.0
 
  ******************************************************************************
 
@@ -27,7 +27,7 @@
 
    Author               Date        Comment
   ---------------------------------------------------------------
-   AsyncLabs			07/11/2009	Initial version
+   AsyncLabs      07/11/2009  Initial version
 
  *****************************************************************************/
 
@@ -46,7 +46,7 @@
 static struct udpapp_state s;
 
 typedef struct { char *value; } Data;
-typedef struct { Data dataset[8]; } GauchitoData;
+typedef struct { Data dataset[10]; } GauchitoData;
 
 extern GauchitoData gData;
 
@@ -56,55 +56,55 @@ void dummy_app_appcall(void)
 
 void udpapp_init(void)
 {
-	uip_ipaddr_t addr;
-	struct uip_udp_conn *c;
+  uip_ipaddr_t addr;
+  struct uip_udp_conn *c;
 
-	uip_ipaddr(&addr, target_ip[0], target_ip[1], target_ip[2], target_ip[3]);
-	c = uip_udp_new(&addr, HTONS(target_port));
-	if(c != NULL) {
-		uip_udp_bind(c, HTONS(target_port));
-	}
+  uip_ipaddr(&addr, target_ip[0], target_ip[1], target_ip[2], target_ip[3]);
+  c = uip_udp_new(&addr, HTONS(target_port));
+  if(c != NULL) {
+    uip_udp_bind(c, HTONS(target_port));
+  }
 
-	s.state = STATE_INIT;
+  s.state = STATE_INIT;
 
-	PT_INIT(&s.pt);
+  PT_INIT(&s.pt);
 }
 
 static unsigned char parse_msg(void)
 {
-	if (memcmp(uip_appdata, "Hello", 5) == 0) {
-		return 1;
-	}
+  if (memcmp(uip_appdata, "Hello", 5) == 0) {
+    return 1;
+  }
 
-	return 0;
+  return 0;
 }
 
 static void send_request(void)
 {
-	char str[] = "Hello. What is your name?\n";
+  char str[] = "Hello. What is your name?\n";
 
-	memcpy(uip_appdata, str, strlen(str));
-	uip_send(uip_appdata, strlen(str));
+  memcpy(uip_appdata, str, strlen(str));
+  uip_send(uip_appdata, strlen(str));
 }
 
 static void send_response(void)
 {
-	char i = 0;
-	char str[] = "Hello ";
+  char i = 0;
+  char str[] = "Hello ";
 
-	while ( ( ((char*)uip_appdata)[i] != '\n') && i < 9) {
-		s.inputbuf[i] = ((char*)uip_appdata)[i];
-		i++;
-	}
-	s.inputbuf[i] = '\n';
+  while ( ( ((char*)uip_appdata)[i] != '\n') && i < 9) {
+    s.inputbuf[i] = ((char*)uip_appdata)[i];
+    i++;
+  }
+  s.inputbuf[i] = '\n';
 
-	memcpy(uip_appdata, str, 6);
-	memcpy(uip_appdata+6, s.inputbuf, i+1);
-	uip_send(uip_appdata, i+7);
+  memcpy(uip_appdata, str, 6);
+  memcpy(uip_appdata+6, s.inputbuf, i+1);
+  uip_send(uip_appdata, i+7);
 }
 
 char* readIR(GauchitoData data) {
-   char buffer[64];   
+   char buffer[128];   
    sprintf(buffer, "%s|%s|%s|%s|%s|%s",
         data.dataset[0].value,
         data.dataset[1].value,
@@ -117,10 +117,11 @@ char* readIR(GauchitoData data) {
 }
 
 char* readSonar(GauchitoData data) {
-    char buffer[32];
-    sprintf(buffer, "%s|%s",
+    char buffer[128];
+    sprintf(buffer, "%s|%s|%s",
         data.dataset[6].value,
-        data.dataset[7].value
+        data.dataset[7].value,
+        data.dataset[8].value
     );
     return buffer;
 }
@@ -141,11 +142,11 @@ static PT_THREAD(handle_connection(void))
 int readData(char* buffer) {
     GauchitoData cpyData;
     memcpy(&cpyData, &gData, sizeof(cpyData));
-    snprintf(buffer, 100, "%s|%s", readIR(cpyData), readSonar(cpyData));
+    snprintf(buffer, 256, "%s|%s", readIR(cpyData), readSonar(cpyData));
     return 1;
 }
 
 void udpapp_appcall(void)
 {
-	handle_connection();
+  handle_connection();
 }

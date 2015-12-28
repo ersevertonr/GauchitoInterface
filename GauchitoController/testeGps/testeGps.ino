@@ -1,4 +1,4 @@
-#include <TinyGPS.h>
+#include <TinyGPS++.h>
 #include <SoftwareSerial.h>
 /*
    This sample code demonstrates the normal use of a TinyGPS++ (TinyGPSPlus) object.
@@ -13,7 +13,7 @@
    GND (fio preto-grosso/marrom)
 */
 //static const int RXPin = 10, TXPin = 11;
-static const int RXPin = 18, TXPin = 17;
+static const int RXPin = 6, TXPin = 7;
 static const uint32_t GPSBaud = 9600;
 
 // The TinyGPS++ object
