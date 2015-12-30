@@ -46,7 +46,7 @@
 static struct udpapp_state s;
 
 typedef struct { char *value; } Data;
-typedef struct { Data dataset[10]; } GauchitoData;
+typedef struct { Data dataset[20]; } GauchitoData;
 
 extern GauchitoData gData;
 
@@ -103,25 +103,63 @@ static void send_response(void)
   uip_send(uip_appdata, i+7);
 }
 
+char* readGPS(GauchitoData data){
+    char buffer[128];
+    sprintf(buffer, "%s|%s",
+  data.dataset[0].value,
+  data.dataset[1].value
+    );
+    return buffer;
+}
+
 char* readIR(GauchitoData data) {
    char buffer[128];   
    sprintf(buffer, "%s|%s|%s|%s|%s|%s",
-        data.dataset[0].value,
-        data.dataset[1].value,
         data.dataset[2].value,
         data.dataset[3].value,
         data.dataset[4].value,
-        data.dataset[5].value
+        data.dataset[5].value,
+        data.dataset[6].value,
+        data.dataset[7].value
    );
    return buffer;
 }
 
 char* readSonar(GauchitoData data) {
     char buffer[128];
-    sprintf(buffer, "%s|%s|%s",
-        data.dataset[6].value,
-        data.dataset[7].value,
-        data.dataset[8].value
+    sprintf(buffer, "%s|%s",
+        data.dataset[8].value,
+        data.dataset[9].value
+    );
+    return buffer;
+}
+
+char* readEngine(GauchitoData data) {
+    char buffer[256];
+    sprintf(buffer, "%s|%s|%s|%s|%s|%s",
+        data.dataset[10].value,
+        data.dataset[11].value,
+        data.dataset[12].value,
+        data.dataset[13].value,
+        data.dataset[14].value,
+        data.dataset[15].value
+    );
+    return buffer;
+}
+
+char* readUltrassom(GauchitoData data) {
+    char buffer[128];
+    sprintf(buffer, "%s|%s",
+        data.dataset[16].value,
+        data.dataset[17].value
+    );
+    return buffer;
+}
+
+char* readBussola(GauchitoData data) {
+    char buffer[128];
+    sprintf(buffer, "%s",
+        data.dataset[18].value
     );
     return buffer;
 }
@@ -142,7 +180,14 @@ static PT_THREAD(handle_connection(void))
 int readData(char* buffer) {
     GauchitoData cpyData;
     memcpy(&cpyData, &gData, sizeof(cpyData));
-    snprintf(buffer, 256, "%s|%s", readIR(cpyData), readSonar(cpyData));
+    snprintf(buffer, 1024, "\n - %s\n - %s\n - %s\n - %s\n - %s\n - %s\n", 
+      readGPS(cpyData), 
+      readIR(cpyData), 
+      readSonar(cpyData), 
+      readEngine(cpyData), 
+      readUltrassom(cpyData), 
+      readBussola(cpyData)
+  );
     return 1;
 }
 

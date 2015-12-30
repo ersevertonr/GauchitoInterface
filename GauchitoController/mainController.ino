@@ -27,8 +27,8 @@ void setup() {
   comm->localIp(192,168,0,129)
     .gatewayIp(192,168,0,1)
     .subnetMask(255,255,255,0)
-    .securityType(SecurityType::WPA2)
-    .targetIp(192,168,0,101)
+    .securityType(SecurityType::OPEN)
+    .targetIp(192,168,0,100)
     .targetPort(12345)
     .connect();
   
@@ -62,7 +62,7 @@ void setFakeData() {
   gData.dataset[11].value  = "MED";         //Motor Esquerdo Distancia Percorrida
   gData.dataset[12].value  = "MDV";         //Motor Direito Velocidade
   gData.dataset[13].value  = "MDD";         //Motor Direito Distancia Percorrida
-  gData.dataset[14].value  = "VT";          //Velocidade Total
+  gData.dataset[14].value  = "VET";          //Velocidade Total
   gData.dataset[15].value  = "DPT";         //Distancia Percorrida Total
   
 // ------------------ ULTRASSOM --------------------    
@@ -72,3 +72,4 @@ void setFakeData() {
 // ------------------ BUSSOLA --------------------    
   gData.dataset[18].value = "Bussola";     //Orientacao Bussola
 }
+
