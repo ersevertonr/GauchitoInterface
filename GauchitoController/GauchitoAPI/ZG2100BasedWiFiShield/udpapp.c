@@ -103,11 +103,19 @@ static void send_response(void)
   uip_send(uip_appdata, i+7);
 }
 
+char* showIndice(GauchitoData data){
+    char buffer[64];
+    sprintf(buffer, "%s",
+  data.dataset[0].value
+    );
+    return buffer;
+}
+
 char* readGPS(GauchitoData data){
     char buffer[128];
     sprintf(buffer, "%s|%s",
-  data.dataset[0].value,
-  data.dataset[1].value
+  data.dataset[1].value,
+  data.dataset[2].value
     );
     return buffer;
 }
@@ -115,12 +123,12 @@ char* readGPS(GauchitoData data){
 char* readIR(GauchitoData data) {
    char buffer[128];   
    sprintf(buffer, "%s|%s|%s|%s|%s|%s",
-        data.dataset[2].value,
         data.dataset[3].value,
         data.dataset[4].value,
         data.dataset[5].value,
         data.dataset[6].value,
-        data.dataset[7].value
+        data.dataset[7].value,
+        data.dataset[8].value
    );
    return buffer;
 }
@@ -128,8 +136,8 @@ char* readIR(GauchitoData data) {
 char* readSonar(GauchitoData data) {
     char buffer[128];
     sprintf(buffer, "%s|%s",
-        data.dataset[8].value,
-        data.dataset[9].value
+        data.dataset[9].value,
+        data.dataset[10].value
     );
     return buffer;
 }
@@ -137,12 +145,12 @@ char* readSonar(GauchitoData data) {
 char* readEngine(GauchitoData data) {
     char buffer[256];
     sprintf(buffer, "%s|%s|%s|%s|%s|%s",
-        data.dataset[10].value,
         data.dataset[11].value,
         data.dataset[12].value,
         data.dataset[13].value,
         data.dataset[14].value,
-        data.dataset[15].value
+        data.dataset[15].value,
+        data.dataset[16].value
     );
     return buffer;
 }
@@ -150,8 +158,8 @@ char* readEngine(GauchitoData data) {
 char* readUltrassom(GauchitoData data) {
     char buffer[128];
     sprintf(buffer, "%s|%s",
-        data.dataset[16].value,
-        data.dataset[17].value
+        data.dataset[17].value,
+        data.dataset[18].value
     );
     return buffer;
 }
@@ -159,7 +167,7 @@ char* readUltrassom(GauchitoData data) {
 char* readBussola(GauchitoData data) {
     char buffer[128];
     sprintf(buffer, "%s",
-        data.dataset[18].value
+        data.dataset[19].value
     );
     return buffer;
 }
@@ -180,7 +188,9 @@ static PT_THREAD(handle_connection(void))
 int readData(char* buffer) {
     GauchitoData cpyData;
     memcpy(&cpyData, &gData, sizeof(cpyData));
-    snprintf(buffer, 1024, "\n - %s\n - %s\n - %s\n - %s\n - %s\n - %s\n", 
+//    snprintf(buffer, 1024, "%s\n - %s\n - %s\n - %s\n - %s\n - %s\n - %s\n", 
+    snprintf(buffer, 1024, "%s - %s - %s - %s - %s - %s - %s", 
+      showIndice(cpyData),
       readGPS(cpyData), 
       readIR(cpyData), 
       readSonar(cpyData), 

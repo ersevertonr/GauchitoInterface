@@ -12,6 +12,8 @@ typedef struct {
 
 GauchitoData gData;
 
+int indice = 0;
+
 // ------------------------------------------------------------------- //
 // --                         GAUCHITO                              -- /
 // ------------------------------------------------------------------- //
@@ -36,40 +38,50 @@ void setup() {
 
 void loop() {
   comm->run();
+//  setIndice();
   setFakeData();
 }
 
+//void setIndice() {
+//  indice++;
+//  char indiceConvert[2];
+//  sprintf(indiceConvert, "%i", indice);
+//  gData.dataset[0].value = indiceConvert;       
+//}
+
 void setFakeData() {
-  Serial.println("x");
+  Serial.println("x");  
+
 // ------------------ GPS ------------------------
-  gData.dataset[0].value = "GPSLat";       //GPS Latitude
-  gData.dataset[1].value = "GPSLon";       //GPS Longitude
+  gData.dataset[1].value = "GPSLat";       //GPS Latitude  
+  gData.dataset[2].value = "GPSLon";       //GPS Longitude
 
 // ------------------ INFRAVERMELHO --------------  
-  gData.dataset[2].value = "IR0";          //Infravermelho 1
-  gData.dataset[3].value = "IR1";          //Infravermelho 2
-  gData.dataset[4].value = "IR2";          //Infravermelho 3
-  gData.dataset[5].value = "IR3";          //Infravermelho 4
-  gData.dataset[6].value = "IR4";          //Infravermelho 5
-  gData.dataset[7].value = "IR5";          //Infravermelho 6
+  gData.dataset[3].value = "IR0";          //Infravermelho 1
+  gData.dataset[4].value = "IR1";          //Infravermelho 2
+  gData.dataset[5].value = "IR2";          //Infravermelho 3
+  gData.dataset[6].value = "IR3";          //Infravermelho 4
+  gData.dataset[7].value = "IR4";          //Infravermelho 5
+  gData.dataset[8].value = "IR5";          //Infravermelho 6
 
 // ------------------ SONAR ----------------------    
-  gData.dataset[8].value = "SonarSinal";   //Sinal do Sonar
-  gData.dataset[9].value = "SonarDist";    //Distancia Medida pelo Sonar
+  gData.dataset[9].value = "SonarSinal";   //Sinal do Sonar
+  gData.dataset[10].value = "SonarDist";    //Distancia Medida pelo Sonar
 
 // ------------------ MOTORES --------------------    
-  gData.dataset[10].value  = "MEV";         //Motor Esquerdo Velocidade
-  gData.dataset[11].value  = "MED";         //Motor Esquerdo Distancia Percorrida
-  gData.dataset[12].value  = "MDV";         //Motor Direito Velocidade
-  gData.dataset[13].value  = "MDD";         //Motor Direito Distancia Percorrida
-  gData.dataset[14].value  = "VET";          //Velocidade Total
-  gData.dataset[15].value  = "DPT";         //Distancia Percorrida Total
+  gData.dataset[11].value  = "MEV";         //Motor Esquerdo Velocidade
+  gData.dataset[12].value  = "MED";         //Motor Esquerdo Distancia Percorrida
+  gData.dataset[13].value  = "MDV";         //Motor Direito Velocidade
+  gData.dataset[14].value  = "MDD";         //Motor Direito Distancia Percorrida
+  gData.dataset[15].value  = "VET";          //Velocidade Total
+  gData.dataset[16].value  = "DPT";         //Distancia Percorrida Total
   
 // ------------------ ULTRASSOM --------------------    
-  gData.dataset[16].value = "USSinal";     //Sinal do Ultrassom
-  gData.dataset[17].value = "USDist";      //Distancia Medida pelo Ultrassom
+  gData.dataset[17].value = "USSinal";     //Sinal do Ultrassom
+  gData.dataset[18].value = "USDist";      //Distancia Medida pelo Ultrassom
   
 // ------------------ BUSSOLA --------------------    
-  gData.dataset[18].value = "Bussola";     //Orientacao Bussola
+  gData.dataset[19].value = "Bussola";     //Orientacao Bussola
+    
 }
 
