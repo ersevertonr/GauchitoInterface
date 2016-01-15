@@ -1,5 +1,5 @@
 carregar:
-	@echo CARREGANDO DADOS DO REPOSITORIO
+	@echo SALVANDO REMOTAMENTE NO GIT
 	@echo ------------------------------
 	git push
 	@echo ------------------------------
