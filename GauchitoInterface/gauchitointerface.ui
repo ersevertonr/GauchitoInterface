@@ -60,9 +60,9 @@
    <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>170</y>
-      <width>511</width>
+      <x>280</x>
+      <y>180</y>
+      <width>191</width>
       <height>111</height>
      </rect>
     </property>
@@ -86,7 +86,7 @@
      <string notr="true">QGroupBox {border: 1px solid black}</string>
     </property>
     <property name="title">
-     <string>Sinal do Wifi</string>
+     <string>Conexão sem fio</string>
     </property>
     <property name="flat">
      <bool>false</bool>
@@ -97,43 +97,17 @@
     <property name="checked">
      <bool>false</bool>
     </property>
-    <widget class="QProgressBar" name="SinalQualidade">
-     <property name="geometry">
-      <rect>
-       <x>210</x>
-       <y>60</y>
-       <width>251</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="value">
-      <number>0</number>
-     </property>
-    </widget>
-    <widget class="QLabel" name="labelQualidade">
-     <property name="geometry">
-      <rect>
-       <x>210</x>
-       <y>40</y>
-       <width>121</width>
-       <height>17</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Qualidade do Sinal:</string>
-     </property>
-    </widget>
     <widget class="QLabel" name="labelStatusSinal">
      <property name="geometry">
       <rect>
        <x>40</x>
        <y>40</y>
-       <width>121</width>
+       <width>131</width>
        <height>17</height>
       </rect>
      </property>
      <property name="text">
-      <string>STATUS do Sinal:</string>
+      <string>STATUS da Conexão:</string>
      </property>
     </widget>
     <widget class="QLabel" name="SinalStatus">
@@ -178,7 +152,6 @@
      <string>Controle</string>
     </property>
     <addaction name="actionControles"/>
-    <addaction name="actionConex_es_de_Rede"/>
    </widget>
    <widget class="QMenu" name="menuSobre_o_Gauchito">
     <property name="title">
@@ -200,16 +173,6 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <action name="actionA_es">
-   <property name="text">
-    <string>Ações</string>
-   </property>
-  </action>
-  <action name="actionConex_es_de_Rede">
-   <property name="text">
-    <string>Conexão WiFi</string>
-   </property>
-  </action>
   <action name="actionInstru_es">
    <property name="text">
     <string>Instruções</string>

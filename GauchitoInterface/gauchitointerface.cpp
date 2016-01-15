@@ -17,14 +17,20 @@ GauchitoInterface::~GauchitoInterface()
 
 void GauchitoInterface::on_actionCentral_de_Monitoramento_triggered()
 {
-    CentralMonitoramento janelaCentralMonitoramento;
-    janelaCentralMonitoramento.setModal(true);
-    janelaCentralMonitoramento.exec();
+    janelaCentralMonitoramento = new CentralMonitoramento(this);
+    janelaCentralMonitoramento->show();
+
+//    CentralMonitoramento janelaCentralMonitoramento;
+//    janelaCentralMonitoramento.setModal(true);
+//    janelaCentralMonitoramento.exec();
 }
 
 void GauchitoInterface::on_actionControles_triggered()
 {
-    ControleAcoes janelaControleAcoes;
-    janelaControleAcoes.setModal(true);
-    janelaControleAcoes.exec();
+    janelaControleAcoes = new ControleAcoes(this);
+    janelaControleAcoes->show();
+
+//    ControleAcoes janelaControleAcoes;
+//    janelaControleAcoes.setModal(true);
+//    janelaControleAcoes.exec();
 }

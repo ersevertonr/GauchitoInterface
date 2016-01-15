@@ -2,6 +2,8 @@
 #define GAUCHITOINTERFACE_H
 
 #include <QMainWindow>
+#include "centralmonitoramento.h"
+#include "controleacoes.h"
 
 namespace Ui {
 class GauchitoInterface;
@@ -22,6 +24,10 @@ private slots:
 
 private:
     Ui::GauchitoInterface *ui;
+
+    CentralMonitoramento *janelaCentralMonitoramento;
+    ControleAcoes *janelaControleAcoes;
+
 };
 
 #endif // GAUCHITOINTERFACE_H
