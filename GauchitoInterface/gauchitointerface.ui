@@ -110,7 +110,7 @@
       <string>STATUS da Conexão:</string>
      </property>
     </widget>
-    <widget class="QLabel" name="SinalStatus">
+    <widget class="QLabel" name="labelDadosWifiSinal">
      <property name="geometry">
       <rect>
        <x>40</x>
@@ -127,7 +127,7 @@
       </font>
      </property>
      <property name="text">
-      <string>OFFLINE</string>
+      <string>-</string>
      </property>
     </widget>
    </widget>

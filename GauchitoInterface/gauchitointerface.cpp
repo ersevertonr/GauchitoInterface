@@ -8,6 +8,9 @@ GauchitoInterface::GauchitoInterface(QWidget *parent) :
     ui(new Ui::GauchitoInterface)
 {
     ui->setupUi(this);
+
+    ui->labelDadosWifiSinal->setText("OFFLINE");
+
 }
 
 GauchitoInterface::~GauchitoInterface()
