@@ -104,7 +104,7 @@ static void send_response(void)
 }
 
 char* showIndice(GauchitoData data){
-    char buffer[64];
+    char buffer[10];
     sprintf(buffer, "%s",
   data.dataset[0].value
     );

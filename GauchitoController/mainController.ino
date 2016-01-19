@@ -12,46 +12,54 @@ typedef struct {
 
 GauchitoData gData;
 
-int indice = 0;
+int indice = 10;
 
 // ------------------------------------------------------------------- //
 // --                         GAUCHITO                              -- /
 // ------------------------------------------------------------------- //
 
-const prog_char ssid[] PROGMEM = {"Gauchito"};
-const prog_char security_passphrase[] PROGMEM = {"gauchito"};
+//const prog_char ssid[] PROGMEM = {"Gauchito"};
+const prog_char ssid[] PROGMEM = {"Everton GS4"};
+//const prog_char security_passphrase[] PROGMEM = {"gauchito"};
+const prog_char security_passphrase[] PROGMEM = {"qwertyui"};
 
 Communication *comm = Communication::getInstance();
 
 void setup() {
   Serial.begin(9600);
   
-  comm->localIp(192,168,0,129)
-    .gatewayIp(192,168,0,1)
+//  comm->localIp(192,168,0,129)
+//    .gatewayIp(192,168,0,1)
+//    .subnetMask(255,255,255,0)
+//    .securityType(SecurityType::OPEN)
+//    .targetIp(192,168,0,100)
+//    .targetPort(12345)
+//    .connect();
+  
+  comm->localIp(192,168,43,129)
+    .gatewayIp(192,168,46,255)
     .subnetMask(255,255,255,0)
-    .securityType(SecurityType::OPEN)
-    .targetIp(192,168,0,100)
+    .securityType(SecurityType::WPA2)
+    .targetIp(192,168,43,89)
     .targetPort(12345)
-    .connect();
+    .connect();  
   
 }
 
 void loop() {
   comm->run();
-//  setIndice();
-  setFakeData();
+  enviaDados();
+  
+  delay(500);
 }
 
-//void setIndice() {
-//  indice++;
-//  char indiceConvert[2];
-//  sprintf(indiceConvert, "%i", indice);
-//  gData.dataset[0].value = indiceConvert;       
-//}
-
-void setFakeData() {
-  Serial.println("x");  
-
+void enviaDados() {
+  indice++;
+  char indiceConvert[1000];
+  sprintf(indiceConvert, "%i", indice);
+  
+  gData.dataset[0].value = indiceConvert;  
+  
 // ------------------ GPS ------------------------
   gData.dataset[1].value = "GPSLat";       //GPS Latitude  
   gData.dataset[2].value = "GPSLon";       //GPS Longitude
@@ -81,7 +89,6 @@ void setFakeData() {
   gData.dataset[18].value = "USDist";      //Distancia Medida pelo Ultrassom
   
 // ------------------ BUSSOLA --------------------    
-  gData.dataset[19].value = "Bussola";     //Orientacao Bussola
-    
+  gData.dataset[19].value = "Bussola";     //Orientacao Bussola  
 }
 
