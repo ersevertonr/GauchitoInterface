@@ -1,3 +1,5 @@
 http://www.inf.pucrs.br/~cnunes/redes_si/Sockets.htm
 
 http://www-usr.inf.ufsm.br/~giovani/sockets/sockets.txt	
+
+http://www.dicas-l.com.br/arquivo/programando_socket_em_c++_sem_segredo.php
