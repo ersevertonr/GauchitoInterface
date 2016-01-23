@@ -157,9 +157,10 @@ char* readEngine(GauchitoData data) {
 
 char* readUltrassom(GauchitoData data) {
     char buffer[128];
-    sprintf(buffer, "%s|%s",
+    sprintf(buffer, "%s|%s|%s",
         data.dataset[17].value,
-        data.dataset[18].value
+        data.dataset[18].value,
+        data.dataset[19].value
     );
     return buffer;
 }
@@ -167,7 +168,7 @@ char* readUltrassom(GauchitoData data) {
 char* readBussola(GauchitoData data) {
     char buffer[128];
     sprintf(buffer, "%s",
-        data.dataset[19].value
+        data.dataset[20].value
     );
     return buffer;
 }
@@ -189,7 +190,7 @@ int readData(char* buffer) {
     GauchitoData cpyData;
     memcpy(&cpyData, &gData, sizeof(cpyData));
 //    snprintf(buffer, 1024, "%s\n - %s\n - %s\n - %s\n - %s\n - %s\n - %s\n", 
-    snprintf(buffer, 1024, "%s - %s - %s - %s - %s - %s - %s", 
+    snprintf(buffer, 2048, "%s - %s - %s - %s - %s - %s - %s", 
       showIndice(cpyData),
       readGPS(cpyData), 
       readIR(cpyData), 

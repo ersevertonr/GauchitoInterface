@@ -26,7 +26,8 @@ public class CommTest {
 	private static void receive(DatagramPacket in) throws IOException {
 		data.receive(in);
 		String inMessage = new String(in.getData(), 0, in.getLength());
-		System.out.println(String.format("Received: %s - from:[%s | %s]", inMessage, in.getAddress(), in.getPort()));
+		//System.out.println(String.format("Received: %s - from:[%s | %s]", inMessage, in.getAddress(), in.getPort()));
+		System.out.println(String.format("Received: %s", inMessage));
 	}
 	
 }
