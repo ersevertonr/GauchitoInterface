@@ -5,6 +5,7 @@
 #include "Arduino.h"
 
 typedef unsigned char uchar_t;
+typedef unsigned long ulong_t;
 
 class IR {
 
@@ -14,9 +15,13 @@ class IR {
             pinMode(pin, INPUT);
         }
 
-    float read();
-    float readIn(IRHandler *handler);
-    float readInCentimeters();
+    ulong_t read();
+    ulong_t readIn(IRHandler *handler);
+    ulong_t readInCentimeters();
+
+//    float read();
+//    float readIn(IRHandler *handler);
+//    float readInCentimeters();
 
     private:
         uint8_t pin;
