@@ -1,13 +1,24 @@
 #include "centralmonitoramento.h"
 #include "ui_centralmonitoramento.h"
+#include <QUdpSocket>
 
-#define LABEL_SIZE 15
+#define LABEL_SIZE 20
 
 CentralMonitoramento::CentralMonitoramento(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::CentralMonitoramento)
 {
     ui->setupUi(this);
+    bufferSocket = new QUdpSocket(this);
+    connect(bufferSocket, &QUdpSocket::readyRead, [&](){
+        if (bufferSocket->hasPendingDatagrams()){
+            QByteArray datagrama;
+            datagrama.resize(bufferSocket->pendingDatagramSize());
+            bufferSocket->readDatagram(datagrama.data(), datagrama.size());
+            ui->printabuffer->addItem(QString(datagrama));
+//            ui->labelTeste->setText(QString(datagrama));
+        }
+    } );
 
 /* ------------ MAPEAMENTO DAS VARIÁVEIS PARA AS LABELS -------------*/
 
@@ -81,4 +92,9 @@ CentralMonitoramento::CentralMonitoramento(QWidget *parent) :
 CentralMonitoramento::~CentralMonitoramento()
 {
     delete ui;
+}
+
+void CentralMonitoramento::on_conectarbuffer_clicked()
+{
+    bufferSocket->bind(12345,QUdpSocket::ShareAddress);
 }

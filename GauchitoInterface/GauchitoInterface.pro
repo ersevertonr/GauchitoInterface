@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -24,6 +24,8 @@ HEADERS  += gauchitointerface.h \
 FORMS    += gauchitointerface.ui \
     centralmonitoramento.ui \
     controleacoes.ui
+
+QMAKE_CXXFLAGS += -std=gnu++11
 
 RESOURCES += \
     imagens.qrc
