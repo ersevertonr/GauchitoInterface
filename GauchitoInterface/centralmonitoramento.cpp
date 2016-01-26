@@ -2,7 +2,13 @@
 #include "ui_centralmonitoramento.h"
 #include <QUdpSocket>
 
-#define LABEL_SIZE 20
+#define QTDE_REG 30
+
+typedef struct { QString valor;} Dado;
+typedef struct { Dado vetor[QTDE_REG];} VetorDados;
+
+VetorDados vDados;
+QString buffer;
 
 CentralMonitoramento::CentralMonitoramento(QWidget *parent) :
     QDialog(parent),
@@ -15,78 +21,52 @@ CentralMonitoramento::CentralMonitoramento(QWidget *parent) :
             QByteArray datagrama;
             datagrama.resize(bufferSocket->pendingDatagramSize());
             bufferSocket->readDatagram(datagrama.data(), datagrama.size());
-            ui->printabuffer->addItem(QString(datagrama));
-//            ui->labelTeste->setText(QString(datagrama));
+            buffer = QString(datagrama);
+
+            int val = 0, ordem = 0;
+            for (int i = 0; i < buffer.size(); i++){
+                if (buffer[i] != QChar('|')){
+                    vDados.vetor[ordem].valor[val] = buffer[i];
+                    ++val;
+                } else {
+                    val = 0;
+                    ++ordem;
+                }
+            }
+
+            ui->labelTeste1->setText(QString(vDados.vetor[0].valor));
+            ui->labelDadosGPSStatus->setText(QString(vDados.vetor[1].valor));
+            ui->labelDadosGPSLatitude->setText(QString(vDados.vetor[2].valor));
+            ui->labelDadosGPSLongitude->setText(QString(vDados.vetor[3].valor));
+
+            ui->labelDadosIV1->setText(QString(vDados.vetor[4].valor));
+            ui->labelDadosIV2->setText(QString(vDados.vetor[5].valor));
+            ui->labelDadosIV3->setText(QString(vDados.vetor[6].valor));
+            ui->labelDadosIV4->setText(QString(vDados.vetor[7].valor));
+            ui->labelDadosIV5->setText(QString(vDados.vetor[8].valor));
+            ui->labelDadosIV6->setText(QString(vDados.vetor[9].valor));
+
+            ui->labelDadosSonarSinal->setText(QString(vDados.vetor[10].valor));
+            ui->labelDadosSonarDistancia->setText(QString(vDados.vetor[11].valor));
+
+            ui->labelDadosMESinal->setText(QString(vDados.vetor[12].valor));
+            ui->labelDadosMEDistancia->setText(QString(vDados.vetor[13].valor));
+            ui->labelDadosMEVelocidade->setText(QString(vDados.vetor[14].valor));
+            ui->labelDadosMDSinal->setText(QString(vDados.vetor[15].valor));
+            ui->labelDadosMDDistancia->setText(QString(vDados.vetor[16].valor));
+            ui->labelDadosMDVelocidade->setText(QString(vDados.vetor[17].valor));
+            ui->labelDadosMDGDistancia->setText(QString(vDados.vetor[18].valor));
+            ui->labelDadosMDGVelocidade->setText(QString(vDados.vetor[19].valor));
+
+            ui->labelDadosUSSinal->setText(QString(vDados.vetor[20].valor));
+            ui->labelDadosUSDistCm->setText(QString(vDados.vetor[21].valor));
+            ui->labelDadosUSDistPol->setText(QString(vDados.vetor[22].valor));
+
+            ui->labelDadosBussolaSinal->setText(QString(vDados.vetor[23].valor));
+            ui->labelDadosBussolaSX->setText(QString(vDados.vetor[24].valor));
+            ui->labelDadosBussolaSY->setText(QString(vDados.vetor[25].valor));
         }
     } );
-
-/* ------------ MAPEAMENTO DAS VARIÁVEIS PARA AS LABELS -------------*/
-
-    /* GPS */
-    const char gpsSinal[LABEL_SIZE]         = "OFF";
-    const char gpsLatitude[LABEL_SIZE]      = "00.00000000";
-    const char gpsLongitude[LABEL_SIZE]     = "00.00000000";
-
-    /* INFRAVERMELHO */
-    const char iv1[LABEL_SIZE]              = "0.0001";
-    const char iv2[LABEL_SIZE]              = "0.0002";
-    const char iv3[LABEL_SIZE]              = "0.0003";
-    const char iv4[LABEL_SIZE]              = "0.0004";
-    const char iv5[LABEL_SIZE]              = "0.0005";
-    const char iv6[LABEL_SIZE]              = "0.0006";
-
-    /* SONAR */
-    const char sonarSinal[LABEL_SIZE]       = "OFF";
-    const char sonarDistancia[LABEL_SIZE]   = "0.0000";
-
-    /* MOTORES */
-    const char meSinal[LABEL_SIZE]          = "OFF";
-    const char meDistancia[LABEL_SIZE]      = "0.0000";
-    const char meVelocidade[LABEL_SIZE]     = "0.0000";
-
-    const char mdSinal[LABEL_SIZE]          = "OFF";
-    const char mdDistancia[LABEL_SIZE]      = "0.0000";
-    const char mdVelocidade[LABEL_SIZE]     = "0.0000";
-
-    const char mdgDistancia[LABEL_SIZE]     = "0.0000";
-    const char mdgVelocidade[LABEL_SIZE]    = "0.0000";
-
-    /* ULTRASSOM */
-    const char usSinal[LABEL_SIZE]          = "OFF";
-    const char usDistancia[LABEL_SIZE]      = "0.0000";
-
-    /* BÚSSOLA */
-    const int bussola                       = 40;
-
-/* ------------------------------------------------------------------*/
-
-    ui->labelDadosGPSStatus->setText(QString("%1").arg(gpsSinal));
-    ui->labelDadosGPSLatitude->setText(QString("%1").arg(gpsLatitude));
-    ui->labelDadosGPSLongitude->setText(QString("%1").arg(gpsLongitude));
-
-    ui->labelDadosIV1->setText(QString("%1").arg(iv1));
-    ui->labelDadosIV2->setText(QString("%1").arg(iv2));
-    ui->labelDadosIV3->setText(QString("%1").arg(iv3));
-    ui->labelDadosIV4->setText(QString("%1").arg(iv4));
-    ui->labelDadosIV5->setText(QString("%1").arg(iv5));
-    ui->labelDadosIV6->setText(QString("%1").arg(iv6));
-
-    ui->labelDadosSonarSinal->setText(QString("%1").arg(sonarSinal));
-    ui->labelDadosSonarDistancia->setText(QString("%1").arg(sonarDistancia));
-
-    ui->labelDadosMESinal->setText(QString("%1").arg(meSinal));
-    ui->labelDadosMEDistancia->setText(QString("%1").arg(meDistancia));
-    ui->labelDadosMEVelocidade->setText(QString("%1").arg(meVelocidade));
-    ui->labelDadosMDSinal->setText(QString("%1").arg(mdSinal));
-    ui->labelDadosMDDistancia->setText(QString("%1").arg(mdDistancia));
-    ui->labelDadosMDVelocidade->setText(QString("%1").arg(mdVelocidade));
-    ui->labelDadosMDGDistancia->setText(QString("%1").arg(mdgDistancia));
-    ui->labelDadosMDGVelocidade->setText(QString("%1").arg(mdgVelocidade));
-
-    ui->labelDadosUSSinal->setText(QString("%1").arg(usSinal));
-    ui->labelDadosUSDistancia->setText(QString("%1").arg(usDistancia));
-
-    ui->labelDadosBussola->setValue(bussola);
 }
 
 CentralMonitoramento::~CentralMonitoramento()

@@ -78,28 +78,78 @@
        <property name="frameShadow">
         <enum>QFrame::Raised</enum>
        </property>
-       <widget class="QListWidget" name="printabuffer">
+       <widget class="QLabel" name="labelTeste1">
         <property name="geometry">
          <rect>
-          <x>60</x>
+          <x>10</x>
           <y>10</y>
-          <width>171</width>
-          <height>221</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLabel" name="labelTeste">
-        <property name="geometry">
-         <rect>
-          <x>270</x>
-          <y>20</y>
-          <width>341</width>
+          <width>671</width>
           <height>21</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <pointsize>10</pointsize>
+          <pointsize>8</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>TESTE</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelTeste2">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>40</y>
+          <width>671</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>8</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>TESTE</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelTeste3">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>70</y>
+          <width>671</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>8</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>TESTE</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelTeste4">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>100</y>
+          <width>671</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>8</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -166,7 +216,7 @@
        </font>
       </property>
       <property name="text">
-       <string>OFF</string>
+       <string>-</string>
       </property>
      </widget>
      <widget class="QLabel" name="labelDadosGPSLatitude">
@@ -675,7 +725,7 @@
        </font>
       </property>
       <property name="text">
-       <string>OFF</string>
+       <string>-</string>
       </property>
      </widget>
      <widget class="QLabel" name="labelDadosSonarDistancia">
@@ -794,7 +844,7 @@
         </font>
        </property>
        <property name="text">
-        <string>OFF</string>
+        <string>-</string>
        </property>
       </widget>
       <widget class="QLabel" name="labelCmEsq_2">
@@ -973,7 +1023,7 @@
         </font>
        </property>
        <property name="text">
-        <string>OFF</string>
+        <string>-</string>
        </property>
       </widget>
       <widget class="QLabel" name="labelVelocidade_2">
@@ -1240,14 +1290,54 @@
        </font>
       </property>
       <property name="text">
-       <string>OFF</string>
+       <string>-</string>
       </property>
      </widget>
-     <widget class="QLabel" name="labelDadosUSDistancia">
+     <widget class="QLabel" name="labelDadosUSDistCm">
       <property name="geometry">
        <rect>
         <x>50</x>
         <y>120</y>
+        <width>101</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>20</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>-</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelDIstUScm_3">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>160</y>
+        <width>59</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>pol</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelDadosUSDistPol">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>150</y>
         <width>101</width>
         <height>21</height>
        </rect>
@@ -1291,103 +1381,103 @@
      <property name="title">
       <string>Bússola</string>
      </property>
-     <widget class="QDial" name="labelDadosBussola">
+     <widget class="QLabel" name="labelDIstUS_3">
       <property name="geometry">
        <rect>
-        <x>230</x>
-        <y>70</y>
-        <width>281</width>
-        <height>231</height>
+        <x>20</x>
+        <y>90</y>
+        <width>141</width>
+        <height>17</height>
        </rect>
       </property>
-      <property name="accessibleName">
-       <string/>
-      </property>
-      <property name="value">
-       <number>0</number>
-      </property>
-      <property name="sliderPosition">
-       <number>0</number>
+      <property name="text">
+       <string>Scale X:</string>
       </property>
      </widget>
-     <widget class="QLabel" name="labelNorte">
+     <widget class="QLabel" name="labelDadosBussolaSX">
       <property name="geometry">
        <rect>
-        <x>360</x>
-        <y>40</y>
-        <width>31</width>
-        <height>41</height>
+        <x>40</x>
+        <y>110</y>
+        <width>211</width>
+        <height>21</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>30</pointsize>
+        <pointsize>20</pointsize>
         <weight>75</weight>
         <bold>true</bold>
        </font>
       </property>
       <property name="text">
-       <string>N</string>
+       <string>-</string>
       </property>
      </widget>
-     <widget class="QLabel" name="labelLeste">
+     <widget class="QLabel" name="labelSinalUltrassom_3">
       <property name="geometry">
        <rect>
-        <x>490</x>
-        <y>160</y>
-        <width>31</width>
-        <height>41</height>
+        <x>20</x>
+        <y>30</y>
+        <width>101</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Sinal Bússola:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelDadosBussolaSinal">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>50</y>
+        <width>101</width>
+        <height>21</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>30</pointsize>
+        <pointsize>20</pointsize>
         <weight>75</weight>
         <bold>true</bold>
        </font>
       </property>
       <property name="text">
-       <string>L</string>
+       <string>-</string>
       </property>
      </widget>
-     <widget class="QLabel" name="labelSul">
+     <widget class="QLabel" name="labelDIstUS_4">
       <property name="geometry">
        <rect>
-        <x>360</x>
-        <y>280</y>
-        <width>31</width>
-        <height>41</height>
+        <x>270</x>
+        <y>90</y>
+        <width>141</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Scale Y:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelDadosBussolaSY">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>110</y>
+        <width>191</width>
+        <height>21</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>30</pointsize>
+        <pointsize>20</pointsize>
         <weight>75</weight>
         <bold>true</bold>
        </font>
       </property>
       <property name="text">
-       <string>S</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labeOeste">
-      <property name="geometry">
-       <rect>
-        <x>210</x>
-        <y>170</y>
-        <width>41</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>30</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>O</string>
+       <string>-</string>
       </property>
      </widget>
     </widget>
