@@ -8,11 +8,11 @@ class SonarHandler {
 
 };
 
-class SonarCentimeters : public SonarHandler {
+class Centimeters : public SonarHandler {
     public:
         long apply(long msec) {
             return ((msec*172) - 273000) / 10000;
         }
 };
 
-#endif SonarHandler_h
+#endif 

@@ -1,12 +1,16 @@
 #include "Sonar.h"
 
 ulong_t Sonar::read() {
+	ulong_t tempo;
     digitalWrite(initPin, HIGH);
-    ulong_t delay = 0;
-    delay = micros();
+
+    tempo = micros();
+
     while (digitalRead(echoPin) == LOW);
+    tempo = micros() - tempo;
     digitalWrite(initPin, LOW);
-    return micros() - delay;
+
+    return tempo;
 }
 
 ulong_t Sonar::readIn(SonarHandler *handler) {

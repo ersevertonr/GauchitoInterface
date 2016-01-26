@@ -1,11 +1,11 @@
 #ifndef Sonar_h
 #define Sonar_h
 
-#include "Arduino.h"
 #include "SonarHandler.h"
+#include "Arduino.h"
 
-typedef unsigned long ulong_t;
 typedef unsigned char uchar_t;
+typedef unsigned long ulong_t;
 
 class Sonar {
     
@@ -15,7 +15,7 @@ class Sonar {
             this->echoPin = echoPin;
             pinMode(initPin, OUTPUT);
             pinMode(echoPin, INPUT);
-            delay(1000);
+            //delay(1000);
         }
         ulong_t read();
         ulong_t readIn(SonarHandler *handler);
@@ -24,7 +24,7 @@ class Sonar {
     private:
         uchar_t initPin;
         uchar_t echoPin;
-        SonarCentimeters *cmHandler;
+        SonarHandler *cmHandler = new Centimeters();
 };
 
 #endif Sonar_h
