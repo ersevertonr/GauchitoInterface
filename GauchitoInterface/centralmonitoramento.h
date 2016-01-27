@@ -18,7 +18,8 @@ public:
     ~CentralMonitoramento();
 
 private slots:
-    void on_conectarbuffer_clicked();
+
+    void on_buttonConectar_clicked();
 
 private:
     Ui::CentralMonitoramento *ui;

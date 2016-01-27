@@ -14,15 +14,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         gauchitointerface.cpp \
-    centralmonitoramento.cpp \
     controleacoes.cpp
 
 HEADERS  += gauchitointerface.h \
-    centralmonitoramento.h \
     controleacoes.h
 
 FORMS    += gauchitointerface.ui \
-    centralmonitoramento.ui \
     controleacoes.ui
 
 QMAKE_CXXFLAGS += -std=gnu++11

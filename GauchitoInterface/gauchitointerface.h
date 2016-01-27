@@ -9,6 +9,8 @@ namespace Ui {
 class GauchitoInterface;
 }
 
+class QUdpSocket;
+
 class GauchitoInterface : public QMainWindow
 {
     Q_OBJECT
@@ -18,12 +20,14 @@ public:
     ~GauchitoInterface();
 
 private slots:
-    void on_actionCentral_de_Monitoramento_triggered();
-
     void on_actionControles_triggered();
+
+    void on_buttonConectar_clicked();
 
 private:
     Ui::GauchitoInterface *ui;
+
+    QUdpSocket *bufferSocket;
 
     CentralMonitoramento *janelaCentralMonitoramento;
     ControleAcoes *janelaControleAcoes;

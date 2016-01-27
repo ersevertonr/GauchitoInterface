@@ -35,8 +35,13 @@ CentralMonitoramento::CentralMonitoramento(QWidget *parent) :
 
             }
 
-            ui->labelTeste0->addItem(buffer);
-            ui->labelTeste1->setText(QString(vDados.vetor[0].valor));
+            if (buffer.isEmpty()){
+                ui->labelDadosWifiSinal->setText("OFFLINE");
+            } else {
+                ui->labelDadosWifiSinal->setText("ONLINE");
+            }
+
+            ui->labelDadosWifiBuffer->addItem(buffer);
 
             ui->labelDadosUSDistanciaCm->setText(QString(vDados.vetor[1].valor));
             ui->labelDadosUSDistanciaPl->setText(QString(vDados.vetor[2].valor));
@@ -44,9 +49,9 @@ CentralMonitoramento::CentralMonitoramento(QWidget *parent) :
             ui->labelDadosSonarDistanciaCm->setText(QString(vDados.vetor[3].valor));
             ui->labelDadosSonarDistanciaPl->setText(QString(vDados.vetor[4].valor));
 
-            ui->labelDadosGPSStatus->setText(QString(vDados.vetor[5].valor));
-            ui->labelDadosGPSLatitude->setText(QString(vDados.vetor[6].valor));
-            ui->labelDadosGPSLongitude->setText(QString(vDados.vetor[7].valor));
+            ui->labelDadosGPSLock->setText(QString(vDados.vetor[5].valor));
+            ui->labelDadosGPSLat->setText(QString(vDados.vetor[6].valor));
+            ui->labelDadosGPSLon->setText(QString(vDados.vetor[7].valor));
 
             ui->labelDadosIV1->setText(QString(vDados.vetor[8].valor));
             ui->labelDadosIV2->setText(QString(vDados.vetor[9].valor));
@@ -79,7 +84,7 @@ CentralMonitoramento::~CentralMonitoramento()
     delete ui;
 }
 
-void CentralMonitoramento::on_conectarbuffer_clicked()
+void CentralMonitoramento::on_buttonConectar_clicked()
 {
     bufferSocket->bind(12345,QUdpSocket::ShareAddress);
 }
