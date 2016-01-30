@@ -2,7 +2,6 @@
 #define GAUCHITOINTERFACE_H
 
 #include <QMainWindow>
-#include "centralmonitoramento.h"
 #include "controleacoes.h"
 
 namespace Ui {
@@ -29,7 +28,6 @@ private:
 
     QUdpSocket *bufferSocket;
 
-    CentralMonitoramento *janelaCentralMonitoramento;
     ControleAcoes *janelaControleAcoes;
 
 };
