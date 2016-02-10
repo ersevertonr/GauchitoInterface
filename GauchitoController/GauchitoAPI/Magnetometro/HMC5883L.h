@@ -26,8 +26,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <Arduino.h>
 #include <Wire.h>
 
-
-
 #define HMC5883L_Address 0x1E
 #define ConfigurationRegisterA 0x00
 #define ConfigurationRegisterB 0x01

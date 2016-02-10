@@ -50,9 +50,4 @@ void setFakeData() {
   
   gData.dataset[6].value = "SONAR0";
   gData.dataset[7].value = "SONAR1";
-
-  gData.dataset[8].value  = "TESTE1";
-  gData.dataset[9].value  = "TESTE2";
-  gData.dataset[10].value = "TESTE3";
-  gData.dataset[11].value = "TESTE4";
 }

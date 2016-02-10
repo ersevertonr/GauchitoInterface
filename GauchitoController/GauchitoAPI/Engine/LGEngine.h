@@ -1,13 +1,13 @@
-#ifndef GEngine_h
-#define GEngine_h
+#ifndef LGEngine_h
+#define LGEngine_h
 
 #include "Engine.h"
-#include "Encoder.h"
+#include "LEncoder.h"
 #include "Reducer.h"
 
-class GEngine {
+class LGEngine {
     public:
-        GEngine(Engine *_eng, Encoder *_enc, Reducer *_red) {
+        LGEngine(Engine *_eng, LEncoder *_enc, Reducer *_red) {
             engine = _eng;
             encoder = _enc;
             reducer = _red;
@@ -25,8 +25,8 @@ class GEngine {
 
     private:
         Engine *engine;
-        Encoder *encoder;
+        LEncoder *encoder;
         Reducer *reducer;
 };
 
-#endif GEngine_h
+#endif LGEngine_h

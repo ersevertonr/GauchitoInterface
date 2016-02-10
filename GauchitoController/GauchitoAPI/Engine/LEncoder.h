@@ -1,5 +1,5 @@
-#ifndef Encoder_h
-#define Encoder_h
+#ifndef LEncoder_h
+#define LEncoder_h
 
 #include "Arduino.h"
 
@@ -7,13 +7,13 @@
 
 typedef unsigned char uchar_t;
 
-class Encoder {
+class LEncoder {
 
     public:
         class Builder {
             public:
                 static uint8_t _IDXCOUNTER;
-                static Encoder * _ENCODERS2DECODE[ENC2DECODE];
+                static LEncoder * _ENCODERS2DECODE[ENC2DECODE];
 
                 uchar_t _channelA;
                 uchar_t _channelB;
@@ -41,8 +41,8 @@ class Encoder {
                     _wheelCircunference = value;
                     return *this;
                 }
-                Encoder *build() {
-                    Encoder *enc = new Encoder(this);
+                LEncoder *build() {
+                    LEncoder *enc = new LEncoder(this);
                     _ENCODERS2DECODE[_IDXCOUNTER] = enc;
                     _IDXCOUNTER = _IDXCOUNTER + 1;
                     enc->attach();
@@ -71,8 +71,8 @@ class Encoder {
         void detach();
         static void encode();
 
-        Encoder() { }
-        Encoder(Builder *builder) {
+        LEncoder() { }
+        LEncoder(Builder *builder) {
             idx = builder->_IDXCOUNTER;
             interruptionPin = builder->_interruptionPin;
             resolution = builder->_resolution;
@@ -89,4 +89,4 @@ class Encoder {
 
 };
 
-#endif Encoder_h
+#endif LEncoder_h

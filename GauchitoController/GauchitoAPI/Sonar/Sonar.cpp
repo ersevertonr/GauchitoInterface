@@ -21,3 +21,6 @@ ulong_t Sonar::readInCentimeters() {
     return cmHandler->apply(read());
 }
 
+ulong_t Sonar::readInInches() {
+    return inHandler->apply(read());
+}

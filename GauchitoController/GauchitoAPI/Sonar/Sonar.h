@@ -20,11 +20,13 @@ class Sonar {
         ulong_t read();
         ulong_t readIn(SonarHandler *handler);
         ulong_t readInCentimeters();
+        ulong_t readInInches();        
 
     private:
         uchar_t initPin;
         uchar_t echoPin;
-        SonarHandler *cmHandler = new Centimeters();
+        SonarHandler *cmHandler = new SonarCentimeters();
+        SonarHandler *inHandler = new SonarInches();
 };
 
 #endif Sonar_h

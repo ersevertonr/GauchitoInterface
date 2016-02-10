@@ -86,7 +86,6 @@ GauchitoInterface::GauchitoInterface(QWidget *parent) :
             }
         }
     } );
-
 }
 
 GauchitoInterface::~GauchitoInterface()

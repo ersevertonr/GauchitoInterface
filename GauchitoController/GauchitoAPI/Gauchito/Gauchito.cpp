@@ -60,7 +60,7 @@ void Gauchito::buildREngine() {
     Reducer *redRight;
     Engine *engRight;
 
-    encRight = Encoder::Builder()
+    encRight = LEncoder::Builder()
         .channelA(RCHA)
         .channelB(RCHB)
         .interruptionPin(RINT)
@@ -82,11 +82,11 @@ void Gauchito::buildREngine() {
 void Gauchito::buildLEngine() {
     Serial.println("building LEngine...");
     GEngine *gEngLeft;
-    Encoder *encLeft;
+    LEncoder *encLeft;
     Reducer *redLeft;
     Engine *engLeft;
 
-    encLeft = Encoder::Builder()
+    encLeft = LEncoder::Builder()
         .channelA(LCHA)
         .channelB(LCHB)
         .interruptionPin(LINT)

@@ -1,7 +1,8 @@
 #include <SonarHandler.h>
 #include <Sonar.h>
 
-Sonar *sonar = new Sonar(4,5);
+
+Sonar *sonar = new Sonar(7);
 void setup() {
   Serial.begin(9600);
 }

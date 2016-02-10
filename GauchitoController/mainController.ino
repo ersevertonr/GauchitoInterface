@@ -6,9 +6,11 @@
 #include <IRHandler.h>
 #include <SonarHandler.h>
 #include <Sonar.h>
-#include <Encoder.h>
+#include <LEncoder.h>
+#include <REncoder.h>
 #include <Engine.h>
-#include <GEngine.h>
+#include <LGEngine.h>
+#include <RGEngine.h>
 #include <BrakeMode.h>
 #include <SpinMode.h>
 #include <Reducer.h>
@@ -30,10 +32,11 @@ IR *ir4 = new IR(A11);
 IR *ir5 = new IR(A10);
 Sonar *sonar = new Sonar(4,5);
 Ultrasonic *ultrasonic = new Ultrasonic(7);
-Encoder *leftEnc;
-GEngine *leftgEng;
-//Encoder *rightEnc;
-//GEngine *rightgEng;
+LEncoder *leftEnc;
+LGEngine *leftgEng;
+REncoder *rightEnc;
+RGEngine *rightgEng;
+
 
 // ------------------------------------------------------------------- //
 // --                         GAUCHITO                              -- /
@@ -47,46 +50,23 @@ Communication *comm = Communication::getInstance();
 void setup() {
   Serial.begin(9600);
   
-  comm->localIp(192,168,1,129)
-    .gatewayIp(192,168,1,255)
+  comm->localIp(192,168,0,129)
+    .gatewayIp(192,168,0,255)
     .subnetMask(255,255,255,0)
     .securityType(SecurityType::OPEN)
-    .targetIp(192,168,1,101)
+    .targetIp(192,168,0,100)
     .targetPort(12345)
     .connect();  
   
-   Engine* leftEng = Engine::Builder()
-           .directionPin(26)
-           .pwmPin(8)
-           .brakePin(24)
-           .configure();
+    Engine* leftEng = Engine::Builder().directionPin(26).pwmPin(8).brakePin(24).configure();     
+    leftEnc = LEncoder::Builder().channelA(3).channelB(22).interruptionPin(1).resolution(16).wheelCircunference(1).build();
+    Reducer *leftRed = new Reducer(19);
+    leftgEng = new LGEngine(leftEng, leftEnc, leftRed);
 
-    leftEnc = Encoder::Builder()
-         .channelA(3)
-         .channelB(22)
-         .interruptionPin(1)
-         .resolution(16)
-         .wheelCircunference(1)
-         .build();
-
-//   Engine* rightEng = Engine::Builder()
-//           .directionPin(26)
-//           .pwmPin(8)
-//           .brakePin(24)
-//           .configure();                   
-//
-//    rightEnc = Encoder::Builder()
-//         .channelA(3)
-//         .channelB(22)
-//         .interruptionPin(1)
-//         .resolution(16)
-//         .wheelCircunference(1)
-//         .build();         
-         
-    Reducer *red = new Reducer(19);
-    leftgEng = new GEngine(leftEng, leftEnc, red);
-//    rightgEng = new GEngine(rightEng, rightEnc, red);
-  
+    Engine* rightEng = Engine::Builder().directionPin(27).pwmPin(45).brakePin(25).configure();           
+    rightEnc = REncoder::Builder().channelA(19).channelB(23).interruptionPin(4).resolution(16).wheelCircunference(1).build();         
+    Reducer *rightRed = new Reducer(19);
+    rightgEng = new RGEngine(rightEng, rightEnc, rightRed);
 }
 
 void loop() {
@@ -139,29 +119,29 @@ void enviaDados() {
   sprintf(SonarDistPl, "%i",sonar->readInInches());
   
 // ----- MOTORES -----  
-char lChA[TAMVAR];
-sprintf(lChA, "%i", leftEnc->readChannelA());
+  char lChA[TAMVAR];
+  sprintf(lChA, "%i", leftEnc->readChannelA());
 
-char lChB[TAMVAR];
-sprintf(lChB, "%i", leftEnc->readChannelB());
+  char lChB[TAMVAR];
+  sprintf(lChB, "%i", leftEnc->readChannelB());
 
-char lCounter[TAMVAR];
-sprintf(lCounter, "%i", leftEnc->getCounter());
+  char lCounter[TAMVAR];
+  sprintf(lCounter, "%i", leftEnc->getCounter());
 
-char lRotation[TAMVAR];
-sprintf(lRotation, "%i", leftgEng->readRotations());
+  char lRotation[TAMVAR];
+  sprintf(lRotation, "%i", leftgEng->readRotations());
 
-//char rChA[TAMVAR];
-//sprintf(rChA, "%i", rightEnc->readChannelA());
-//
-//char rChB[TAMVAR];
-//sprintf(rChB, "%i", rightEnc->readChannelB());
-//
-//char rCounter[TAMVAR];
-//sprintf(rCounter, "%i", rightEnc->getCounter());
-//
-//char rRotation[TAMVAR];
-//sprintf(rRotation, "%i", rightgEng->readRotations());
+  char rChA[TAMVAR];
+  sprintf(rChA, "%i", rightEnc->readChannelA());
+
+  char rChB[TAMVAR];
+  sprintf(rChB, "%i", rightEnc->readChannelB());
+
+  char rCounter[TAMVAR];
+  sprintf(rCounter, "%i", rightEnc->getCounter());
+
+  char rRotation[TAMVAR];
+  sprintf(rRotation, "%i", rightgEng->readRotations());
 
 
 // ------- MAPEAMENTO DE VARIVEIS ---------------------------------------
@@ -184,11 +164,11 @@ sprintf(lRotation, "%i", leftgEng->readRotations());
   gData.dataset[16].value  = lChA;             //Motor Esquerdo Channel A
   gData.dataset[17].value  = lChB;             //Motor Esquerdo Channel B
   gData.dataset[18].value  = lCounter;         //Motor Esquerdo Rolagem
-  gData.dataset[19].value  = lRotation;         //Motor Esquerdo Qtde de Rotacao
-  gData.dataset[20].value  = lChA;           //Motor Direito Channel A
-  gData.dataset[21].value  = lChB;           //Motor Direito Channel B
-  gData.dataset[22].value  = lCounter;       //Motor Direito Rolagem
-  gData.dataset[23].value  = lRotation;      //Motor Direito Qtde de Rotacao
+  gData.dataset[19].value  = lRotation;        //Motor Esquerdo Qtde de Rotacao
+  gData.dataset[20].value  = rChA;             //Motor Direito Channel A
+  gData.dataset[21].value  = rChB;             //Motor Direito Channel B
+  gData.dataset[22].value  = rCounter;         //Motor Direito Rolagem
+  gData.dataset[23].value  = rRotation;        //Motor Direito Qtde de Rotacao
   gData.dataset[24].value  = "VET";            //Velocidade Total
   gData.dataset[25].value  = "DPT";            //Distancia Percorrida Total
 }

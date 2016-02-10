@@ -3,3 +3,14 @@ http://www.inf.pucrs.br/~cnunes/redes_si/Sockets.htm
 http://www-usr.inf.ufsm.br/~giovani/sockets/sockets.txt	
 
 http://www.dicas-l.com.br/arquivo/programando_socket_em_c++_sem_segredo.php
+
+http://www.puc-rio.br/pibic/relatorio_resumo2014/relatorios_pdf/ctc/ELE/ELE-Lucas%20Grativol%20Ribeiro.pdf
+http://www.dca.ufrn.br/~adelardo/artigos/SBAI07b.pdf
+
+
+
+LER COM CALMA ESTE TRABALHO 
+http://ardadv.blogspot.com.br/2012/05/using-odometry-for-dead-reckoning-with.html
+http://www.gioblu.com/tutorials/robotica/217-robot-cartesiano-e-odometria-con-arduino
+
+http://www.ipg.pt/user/~ccarreto/_private/SR/Docs/0304/Navega%C3%A7%C3%A3o.pdf
