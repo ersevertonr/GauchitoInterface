@@ -1449,7 +1449,7 @@
          </font>
         </property>
         <property name="text">
-         <string>cm/s</string>
+         <string>X</string>
         </property>
        </widget>
        <widget class="QLabel" name="labelCmEsq_4">
@@ -1469,7 +1469,7 @@
          </font>
         </property>
         <property name="text">
-         <string>cm</string>
+         <string>Y</string>
         </property>
        </widget>
        <widget class="QLabel" name="labelDadosMGVelocidade">

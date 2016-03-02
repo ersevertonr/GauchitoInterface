@@ -1,3 +1,4 @@
+
 #include <Communication.h>
 #include <SecurityType.h>
 #include <UltrasonicHandler.h>
@@ -15,9 +16,13 @@
 #include <SpinMode.h>
 #include <Reducer.h>
 #include "WiShield.h"
+#include <myfunc.h>
 
 #define TAMVAR 20
 #define QTDE_REG 30
+int defDelay = 500;
+int leftLastCounter = 0;
+int rightLastCounter = 0;
 
 typedef struct { char *value;} Data;
 typedef struct { Data dataset[30];} GauchitoData;
@@ -37,26 +42,25 @@ LGEngine *leftgEng;
 REncoder *rightEnc;
 RGEngine *rightgEng;
 
-
 // ------------------------------------------------------------------- //
 // --                         GAUCHITO                              -- /
 // ------------------------------------------------------------------- //
 
  const prog_char ssid[] PROGMEM = {"ChurrascoComChimarrao"};
  const prog_char security_passphrase[] PROGMEM = {""};
-
+ 
 Communication *comm = Communication::getInstance();
 
 void setup() {
   Serial.begin(9600);
   
-  comm->localIp(192,168,0,129)
-    .gatewayIp(192,168,0,255)
+  comm->localIp(192,168,1,129)
+    .gatewayIp(192,168,1,255)
     .subnetMask(255,255,255,0)
     .securityType(SecurityType::OPEN)
-    .targetIp(192,168,0,100)
+    .targetIp(192,168,1,100)
     .targetPort(12345)
-    .connect();  
+    .connect();   
   
     Engine* leftEng = Engine::Builder().directionPin(26).pwmPin(8).brakePin(24).configure();     
     leftEnc = LEncoder::Builder().channelA(3).channelB(22).interruptionPin(1).resolution(16).wheelCircunference(1).build();
@@ -71,9 +75,9 @@ void setup() {
 
 void loop() {
   comm->run();
-  enviaDados();
+  enviaDados(); 
   
-  delay(50);
+  delay(defDelay);
 }
 
 void enviaDados() {
@@ -119,6 +123,15 @@ void enviaDados() {
   sprintf(SonarDistPl, "%i",sonar->readInInches());
   
 // ----- MOTORES -----  
+  int leftCountEncoder = leftEnc->getCounter() * (-1);
+  int rightCountEncoder = rightEnc->getCounter();
+
+  int leftCounterForSecond = leftCountEncoder - leftLastCounter;
+  leftLastCounter = leftCountEncoder;
+  
+  int rightCounterForSecond = rightCountEncoder - rightLastCounter;
+  rightLastCounter = rightCountEncoder;
+
   char lChA[TAMVAR];
   sprintf(lChA, "%i", leftEnc->readChannelA());
 
@@ -126,10 +139,10 @@ void enviaDados() {
   sprintf(lChB, "%i", leftEnc->readChannelB());
 
   char lCounter[TAMVAR];
-  sprintf(lCounter, "%i", leftEnc->getCounter());
+  sprintf(lCounter, "%i", leftCountEncoder);
 
   char lRotation[TAMVAR];
-  sprintf(lRotation, "%i", leftgEng->readRotations());
+  sprintf(lRotation, "%i", leftgEng->readRotations() * (-1));
 
   char rChA[TAMVAR];
   sprintf(rChA, "%i", rightEnc->readChannelA());
@@ -138,11 +151,34 @@ void enviaDados() {
   sprintf(rChB, "%i", rightEnc->readChannelB());
 
   char rCounter[TAMVAR];
-  sprintf(rCounter, "%i", rightEnc->getCounter());
+  sprintf(rCounter, "%i", rightCountEncoder);
 
   char rRotation[TAMVAR];
   sprintf(rRotation, "%i", rightgEng->readRotations());
 
+  char lSpeed[TAMVAR];
+  sprintf(lSpeed, "%i",calculaVelocidade(leftCounterForSecond,defDelay));
+  
+  char rSpeed[TAMVAR];
+  sprintf(rSpeed, "%i",calculaVelocidade(rightCounterForSecond,defDelay));
+  
+  char lDistance[TAMVAR];
+  sprintf(lDistance, "%i",distanciaPercorrida(leftCountEncoder));
+  
+  char rDistance[TAMVAR];
+  sprintf(rDistance, "%i",distanciaPercorrida(rightCountEncoder));
+  
+//  char yCoord[TAMVAR];
+//  sprintf(yCoord, "%i",coordenadaY(2, 2.1));
+//  
+//  char xCoord[TAMVAR];
+//  sprintf(xCoord, "%i",coordenadaX(2, 2.1));
+  
+  char yCoord[TAMVAR];
+  sprintf(yCoord, "%i",coordenadaY(distanciaPercorrida(leftCountEncoder),distanciaPercorrida(rightCountEncoder)));
+
+  char xCoord[TAMVAR];
+  sprintf(xCoord, "%i",coordenadaX(distanciaPercorrida(leftCountEncoder),distanciaPercorrida(rightCountEncoder)));
 
 // ------- MAPEAMENTO DE VARIVEIS ---------------------------------------
   gData.dataset[0].value  = USDistCm;          //Distancia Medida pelo Ultrassom em Cm
@@ -165,11 +201,14 @@ void enviaDados() {
   gData.dataset[17].value  = lChB;             //Motor Esquerdo Channel B
   gData.dataset[18].value  = lCounter;         //Motor Esquerdo Rolagem
   gData.dataset[19].value  = lRotation;        //Motor Esquerdo Qtde de Rotacao
-  gData.dataset[20].value  = rChA;             //Motor Direito Channel A
-  gData.dataset[21].value  = rChB;             //Motor Direito Channel B
-  gData.dataset[22].value  = rCounter;         //Motor Direito Rolagem
-  gData.dataset[23].value  = rRotation;        //Motor Direito Qtde de Rotacao
-  gData.dataset[24].value  = "VET";            //Velocidade Total
-  gData.dataset[25].value  = "DPT";            //Distancia Percorrida Total
+  gData.dataset[20].value  = lSpeed;           //Motor Direito Velocidade Total
+  gData.dataset[21].value  = lDistance;        //Distancia Percorrida Total  
+  gData.dataset[22].value  = rChA;             //Motor Direito Channel A
+  gData.dataset[23].value  = rChB;             //Motor Direito Channel B
+  gData.dataset[24].value  = rCounter;         //Motor Direito Rolagem
+  gData.dataset[25].value  = rRotation;        //Motor Direito Qtde de Rotacao
+  gData.dataset[26].value  = rSpeed;           //Motor Esquerdo Velocidade Total  
+  gData.dataset[27].value  = rDistance;        //Distancia Percorrida Total
+  gData.dataset[28].value  = yCoord;           //Posicao Y
+  gData.dataset[29].value  = xCoord;           //Posicao X
 }
-

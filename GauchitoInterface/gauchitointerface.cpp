@@ -2,6 +2,7 @@
 #include "ui_gauchitointerface.h"
 #include "controleacoes.h"
 #include <QUdpSocket>
+#include <math.h>
 
 #define QTDE_REG 30
 
@@ -11,6 +12,7 @@ typedef struct { Dado vetor[QTDE_REG];} VetorDados;
 VetorDados vDados;
 QString buffer;
 int ping = 0;
+int vlrX, vlrY;
 
 GauchitoInterface::GauchitoInterface(QWidget *parent) :
     QMainWindow(parent),
@@ -73,13 +75,18 @@ GauchitoInterface::GauchitoInterface(QWidget *parent) :
             ui->labelDadoslChB->setText(QString(vDados.vetor[17].valor));
             ui->labelDadoslCounter->setText(QString(vDados.vetor[18].valor));
             ui->labelDadoslRotation->setText(QString(vDados.vetor[19].valor));
-            ui->labelDadosrChA->setText(QString(vDados.vetor[20].valor));
-            ui->labelDadosrChB->setText(QString(vDados.vetor[21].valor));
-            ui->labelDadosrCounter->setText(QString(vDados.vetor[22].valor));
-            ui->labelDadosrRotation->setText(QString(vDados.vetor[23].valor));
+            ui->labelDadosMEVelocidade->setText(QString(vDados.vetor[20].valor));
+            ui->labelDadosMEDistancia->setText(QString(vDados.vetor[21].valor));
 
-            ui->labelDadosMGVelocidade->setText(QString(vDados.vetor[24].valor));
-            ui->labelDadosMGDistancia->setText(QString(vDados.vetor[25].valor));
+            ui->labelDadosrChA->setText(QString(vDados.vetor[22].valor));
+            ui->labelDadosrChB->setText(QString(vDados.vetor[23].valor));
+            ui->labelDadosrCounter->setText(QString(vDados.vetor[24].valor));
+            ui->labelDadosrRotation->setText(QString(vDados.vetor[25].valor));
+            ui->labelDadosMDVelocidade->setText(QString(vDados.vetor[26].valor));
+            ui->labelDadosMDDistancia->setText(QString(vDados.vetor[27].valor));
+            ui->labelDadosMGVelocidade->setText(QString(vDados.vetor[28].valor));
+            ui->labelDadosMGDistancia->setText(QString(vDados.vetor[29].valor));
+
 
             for (int i = 0; i < buffer.size();i++){
                 vDados.vetor[i].valor = " ";
